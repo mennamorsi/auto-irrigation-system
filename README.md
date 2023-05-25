@@ -97,5 +97,33 @@ We have 4 Endpoints for Plot:
             "plotType": "type C"
          } 
       
-         
+    > Get all plots
+
+       Request: GET http://localhost:8080/api/plots
+        Response Body:[{
+          "id": 1,
+          "plotCode": "A120",
+          "plotLength": 12,
+          "plotWidth": 10,
+          "plotType": "type A"
+         },
+         {
+          "id": 2,
+          "plotCode": "C120",
+          "plotLength": 12,
+          "plotWidth": 10,
+          "plotType": "type C"
+         }]
+
+> Some hints:
+
+- We have a data.sql file to insert initially 4 plots with their configuration
+- We use cron triggering to trigger a job for each configuration we have while starting the app
+- When configure a new plot, we will trigger a new cron job.
+- When we configure an exist plot we will remove the running job and start another one with the new configuration
+- PlotCode should be unique
+- timeSpanInDays should be integer with range [1-6]
+- to simulate the sensor is unavailable, we should set numberOfBlockedRetries with any value greater than 0
+
+
  Go to your browser http://localhost:8080/api/ and try any request.
